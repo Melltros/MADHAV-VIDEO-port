@@ -1221,123 +1221,6 @@
         }
 
         /* ============================================
-           CONTACT
-        ============================================ */
-        #contact {
-            padding: 100px 60px 90px;
-            border-top: 1px solid var(--border);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            gap: 60px;
-            align-items: start;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .contact-lead {
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            font-family: var(--font-big);
-            letter-spacing: 0.06em;
-            line-height: 1.15;
-            margin-bottom: 20px;
-        }
-
-        .contact-lead .outline-text {
-            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
-            -webkit-text-fill-color: transparent;
-        }
-
-        .contact-sub {
-            font-size: 0.95rem;
-            color: var(--muted);
-            line-height: 1.65;
-            max-width: 36ch;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 22px;
-        }
-
-        .form-field label {
-            display: block;
-            font-size: 0.65rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 10px;
-        }
-
-        .form-field input,
-        .form-field textarea {
-            width: 100%;
-            padding: 16px 18px;
-            font-family: inherit;
-            font-size: 0.95rem;
-            color: #fff;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            outline: none;
-            transition: border-color 0.3s, background 0.3s;
-        }
-
-        .form-field input:focus,
-        .form-field textarea:focus {
-            border-color: rgba(0,255,136,0.4);
-            background: rgba(0,255,136,0.04);
-        }
-
-        .form-field textarea {
-            min-height: 160px;
-            resize: vertical;
-        }
-
-        .contact-submit {
-            align-self: flex-start;
-            margin-top: 6px;
-            padding: 16px 40px;
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #080808;
-            background: var(--green);
-            border: none;
-            border-radius: 100px;
-            cursor: pointer;
-            transition: transform 0.25s, box-shadow 0.25s;
-        }
-
-        .contact-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(0,255,136,0.25);
-        }
-
-        .form-status {
-            font-size: 0.85rem;
-            color: var(--muted);
-            min-height: 1.4em;
-        }
-
-        .form-status.success { color: var(--green); }
-        .form-status.error { color: #f87171; }
-
-        @media (max-width: 900px) {
-            #contact {
-                padding: 72px 24px 64px;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-        }
-
-        /* ============================================
            FOOTER
         ============================================ */
         footer {
@@ -1455,7 +1338,6 @@
             <li><a href="#work">Work</a></li>
             <li><a href="#process">Process</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#contact">Contact</a></li>
             <li><a href="#cta" class="nav-cta">Hire Me</a></li>
         </ul>
     </nav>
@@ -1467,7 +1349,6 @@
             <li><a href="#work">Work</a></li>
             <li><a href="#process">Process</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#contact">Contact</a></li>
             <li><a href="#cta" class="nav-cta">Hire Me</a></li>
         </ul>
     </aside>
@@ -1886,55 +1767,16 @@
     </section>
 
     <!-- ==========================================
-         CONTACT
-    =========================================== -->
-    <section id="contact">
-        <div class="section-label">Get in Touch</div>
-        <div class="contact-grid">
-            <div>
-                <h2 class="contact-lead">
-                    LET'S TALK<br>
-                    <span class="outline-text">ABOUT YOUR</span><br>
-                    NEXT PROJECT
-                </h2>
-                <p class="contact-sub">
-                    Share a bit about your timeline, budget range, and links to references. I typically reply within 24–48 hours.
-                </p>
-            </div>
-            <div>
-                <!-- Replace YOUR_FORM_ID with your Formspree form id from https://formspree.io -->
-                <form id="contact-form" class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
-                    <div class="form-field">
-                        <label for="contact-name">Name</label>
-                        <input type="text" id="contact-name" name="name" required autocomplete="name" placeholder="Your name">
-                    </div>
-                    <div class="form-field">
-                        <label for="contact-email">Email</label>
-                        <input type="email" id="contact-email" name="email" required autocomplete="email" placeholder="you@example.com">
-                    </div>
-                    <div class="form-field">
-                        <label for="contact-message">Message</label>
-                        <textarea id="contact-message" name="message" required placeholder="Tell me about the project…"></textarea>
-                    </div>
-                    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true">
-                    <button type="submit" class="contact-submit hover-target">Send message</button>
-                    <p class="form-status" id="contact-form-status" role="status"></p>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==========================================
          FOOTER
     =========================================== -->
     <footer>
         <span class="footer-logo">MADHAV.</span>
         <span class="footer-copy">© 2026 — All Rights Reserved</span>
         <div class="footer-socials">
-            <a href="https://www.instagram.com/madhavcreates/" target="_blank" rel="noopener noreferrer">Instagram</a>
-            <a href="https://www.youtube.com/@madhavcreates" target="_blank" rel="noopener noreferrer">YouTube</a>
-            <a href="https://twitter.com/madhavcreates" target="_blank" rel="noopener noreferrer">Twitter</a>
-            <a href="https://www.linkedin.com/in/madhavcreates/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.instagram.com/melltros_/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.youtube.com/@Melltros" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+            <a href="https://www.linkedin.com/in/madhav-kelodia-5260ba354/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
     </footer>
 
@@ -2311,43 +2153,6 @@
             ease: 'power3.out'
         });
 
-        // ─────────────────────────────────────────
-        // 10b. CONTACT SECTION
-        // ─────────────────────────────────────────
-        gsap.from('.contact-lead', {
-            scrollTrigger: {
-                trigger: '#contact',
-                start: 'top 72%'
-            },
-            opacity: 0,
-            y: 50,
-            duration: 1,
-            ease: 'power4.out'
-        });
-
-        gsap.from('.contact-sub', {
-            scrollTrigger: {
-                trigger: '#contact',
-                start: 'top 68%'
-            },
-            opacity: 0,
-            y: 24,
-            duration: 0.8,
-            delay: 0.15,
-            ease: 'power3.out'
-        });
-
-        gsap.from('.contact-form', {
-            scrollTrigger: {
-                trigger: '#contact',
-                start: 'top 75%'
-            },
-            opacity: 0,
-            y: 36,
-            duration: 0.85,
-            ease: 'power3.out'
-        });
-
         // CTA background text parallax
         gsap.to('.cta-bg-text', {
             scrollTrigger: {
@@ -2419,7 +2224,7 @@
     // ──────────────────────────────────────────────
     // NAV LINK ACTIVE STATE ON SCROLL
     // ──────────────────────────────────────────────
-    ['about','work','process','services','cta','contact'].forEach(id => {
+    ['about','work','process','services','cta'].forEach(id => {
         ScrollTrigger.create({
             trigger: `#${id}`,
             start: 'top 50%',
@@ -2493,53 +2298,6 @@
                 gsap.set(backdrop, { opacity: 0, pointerEvents: 'none' });
                 gsap.set(drawer, { x: '100%' });
                 menuTl.pause(0);
-            }
-        });
-    })();
-
-    // ──────────────────────────────────────────────
-    // CONTACT FORM (Formspree)
-    // ──────────────────────────────────────────────
-    (function initContactForm() {
-        const form = document.getElementById('contact-form');
-        const statusEl = document.getElementById('contact-form-status');
-        if (!form || !statusEl) return;
-
-        form.addEventListener('submit', async e => {
-            e.preventDefault();
-            statusEl.textContent = '';
-            statusEl.classList.remove('success', 'error');
-
-            const action = form.getAttribute('action') || '';
-            if (action.includes('YOUR_FORM_ID')) {
-                statusEl.textContent = 'Replace YOUR_FORM_ID in the form action with your Formspree form ID.';
-                statusEl.classList.add('error');
-                return;
-            }
-
-            const btn = form.querySelector('.contact-submit');
-            if (btn) btn.disabled = true;
-
-            try {
-                const res = await fetch(action, {
-                    method: 'POST',
-                    body: new FormData(form),
-                    headers: { Accept: 'application/json' }
-                });
-                if (res.ok) {
-                    statusEl.textContent = 'Thanks — your message is on its way.';
-                    statusEl.classList.add('success');
-                    form.reset();
-                } else {
-                    const data = await res.json().catch(() => ({}));
-                    statusEl.textContent = (data && data.error) || 'Something went wrong. Please try again or email directly.';
-                    statusEl.classList.add('error');
-                }
-            } catch (err) {
-                statusEl.textContent = 'Network error. Check your connection or email me directly.';
-                statusEl.classList.add('error');
-            } finally {
-                if (btn) btn.disabled = false;
             }
         });
     })();
