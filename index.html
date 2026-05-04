@@ -2249,6 +2249,14 @@
                 '.cta-headline', '.cta-email', '.section-label'
             ], { clearProps: 'all' });
 
+            // In light mode we skip counter animation, so set final values immediately.
+            document.querySelectorAll('.stat-num').forEach(el => {
+                const target = parseInt(el.getAttribute('data-count') || '0', 10);
+                const label = el.closest('.stat-item')?.querySelector('.stat-label')?.textContent || '';
+                const suffix = label.includes('%') ? '%' : '+';
+                el.textContent = target + suffix;
+            });
+
             const nav = document.getElementById('navbar');
             if (nav) {
                 const updateNavSurface = () => {
@@ -2345,11 +2353,12 @@
                             ease: 'power2.out',
                             snap: { innerText: 1 },
                             onUpdate: function() {
-                                const suffix = el.closest('.stat-item').querySelector('.stat-label').textContent.includes('%') ? '+' : '+';
+                                const suffix = el.closest('.stat-item').querySelector('.stat-label').textContent.includes('%') ? '%' : '+';
                                 el.textContent = Math.floor(this.targets()[0].innerText) + suffix;
                             },
                             onComplete: () => {
-                                el.textContent = target + '+';
+                                const suffix = el.closest('.stat-item').querySelector('.stat-label').textContent.includes('%') ? '%' : '+';
+                                el.textContent = target + suffix;
                             }
                         }
                     );
