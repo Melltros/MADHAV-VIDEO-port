@@ -2015,12 +2015,97 @@
             mix-blend-mode: screen;
             will-change: transform, opacity;
         }
+
+        /* ============================================
+           METRICS HUD (Animated Graphs)
+        ============================================ */
+        #metrics-hud {
+            position: fixed;
+            bottom: 120px;
+            right: 20px;
+            width: 180px;
+            padding: 16px;
+            background: rgba(10, 10, 10, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 12px;
+            z-index: 100;
+            pointer-events: none;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: opacity 0.3s ease;
+        }
+
+        @media (max-width: 767px) {
+            #metrics-hud {
+                display: none; /* Hide on small mobile to save space */
+            }
+        }
+
+        .metrics-title {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            color: var(--green);
+            opacity: 0.8;
+            font-family: inherit;
+        }
+
+        .metrics-graph-svg {
+            width: 100%;
+            height: 40px;
+            overflow: visible;
+        }
+
+        .metrics-path {
+            fill: none;
+            stroke: var(--purple);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 0 6px rgba(139, 92, 246, 0.4));
+        }
+
+        .metrics-bars-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 20px;
+            width: 100%;
+        }
+
+        .metrics-bar {
+            width: 4px;
+            background: var(--green);
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+        }
     </style>
 </head>
 
 <body>
     <!-- Aesthetic Overlays -->
     <div id="particle-overlay" aria-hidden="true"></div>
+
+    <!-- Metrics HUD -->
+    <div id="metrics-hud" aria-hidden="true">
+        <div class="metrics-title">RENDER METRICS</div>
+        <svg class="metrics-graph-svg" viewBox="0 0 100 40">
+            <path class="metrics-path" d="M0,20 Q10,10 20,20 T40,20 T60,20 T80,20 T100,20"></path>
+        </svg>
+        <div class="metrics-bars-container">
+            <div class="metrics-bar" style="height: 100%"></div>
+            <div class="metrics-bar" style="height: 80%"></div>
+            <div class="metrics-bar" style="height: 60%"></div>
+            <div class="metrics-bar" style="height: 90%"></div>
+            <div class="metrics-bar" style="height: 40%"></div>
+            <div class="metrics-bar" style="height: 70%"></div>
+            <div class="metrics-bar" style="height: 50%"></div>
+            <div class="metrics-bar" style="height: 100%"></div>
+        </div>
+    </div>
 
     <!-- Noise Grain -->
     <div id="grain" aria-hidden="true"></div>
@@ -3596,6 +3681,70 @@
                 });
             }
         }, 500);
+    })();
+
+    // ──────────────────────────────────────────────
+    // 15. ANIMATED METRICS HUD
+    // ──────────────────────────────────────────────
+    (function initMetricsHUD() {
+        // Only run if HUD exists (e.g., desktop)
+        const hud = document.getElementById('metrics-hud');
+        if (!hud) return;
+
+        // 1. Animate Audio/CPU Bars
+        const bars = hud.querySelectorAll('.metrics-bar');
+        bars.forEach((bar) => {
+            gsap.to(bar, {
+                height: () => `${gsap.utils.random(20, 100)}%`,
+                duration: gsap.utils.random(0.1, 0.4),
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut',
+                delay: gsap.utils.random(0, 0.2)
+            });
+        });
+
+        // 2. Animate SVG Line Graph
+        const path = hud.querySelector('.metrics-path');
+        
+        function updateGraph() {
+            // Generate random bezier curve string for a smooth graph
+            const pts = [
+                0, gsap.utils.random(5, 35),
+                15, gsap.utils.random(5, 35),
+                30, gsap.utils.random(5, 35),
+                45, gsap.utils.random(5, 35),
+                60, gsap.utils.random(5, 35),
+                75, gsap.utils.random(5, 35),
+                90, gsap.utils.random(5, 35),
+                100, gsap.utils.random(5, 35)
+            ];
+            
+            // Build smooth quadratic bezier path
+            const d = `M0,${pts[1]} Q${pts[2]/2},${pts[3]} ${pts[2]},${(pts[1]+pts[3])/2} T${pts[4]},${(pts[3]+pts[5])/2} T${pts[6]},${(pts[5]+pts[7])/2} T${pts[8]},${(pts[7]+pts[9])/2} T${pts[10]},${(pts[9]+pts[11])/2} T${pts[12]},${(pts[11]+pts[13])/2} T${pts[14]},${pts[15]}`;
+
+            gsap.to(path, {
+                attr: { d: d },
+                duration: 1.5,
+                ease: 'power1.inOut',
+                onComplete: updateGraph
+            });
+        }
+        
+        updateGraph();
+
+        // 3. Parallax Hover Effect
+        window.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            
+            gsap.to(hud, {
+                x: x,
+                y: y,
+                duration: 0.8,
+                ease: 'power2.out'
+            });
+        });
     })();
 
     </script>
