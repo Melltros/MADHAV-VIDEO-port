@@ -1279,6 +1279,304 @@
         }
 
         /* ============================================
+           MOBILE & TABLET LAYOUT
+        ============================================ */
+        @media (max-width: 991px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+                gap: 56px;
+            }
+
+            .process-sticky {
+                position: relative;
+                top: auto;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 767px) {
+            nav {
+                padding: 16px 18px;
+            }
+
+            nav::after {
+                left: 18px;
+                right: 18px;
+            }
+
+            .nav-logo {
+                font-size: 1.2rem;
+            }
+
+            #loader-bar-wrap {
+                width: min(280px, 88vw);
+            }
+
+            #hero {
+                min-height: 100vh;
+                min-height: 100dvh;
+                padding: 88px 18px 40px;
+            }
+
+            .hero-eyebrow {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .hero-age-badge {
+                margin-left: 0;
+            }
+
+            .hero-headline {
+                font-size: clamp(2.75rem, 17vw, 4.5rem);
+                line-height: 0.9;
+            }
+
+            .hero-bottom {
+                flex-direction: column;
+                align-items: stretch;
+                margin-top: 32px;
+                gap: 28px;
+            }
+
+            .hero-desc {
+                max-width: none;
+                font-size: 0.9rem;
+            }
+
+            .hero-cta-group {
+                align-items: stretch;
+            }
+
+            .btn-primary {
+                justify-content: center;
+                padding: 16px 24px;
+                font-size: 0.8rem;
+            }
+
+            .hero-stats {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                margin-top: 40px;
+            }
+
+            .stat-item {
+                padding: 18px 14px !important;
+                border-right: 1px solid var(--border);
+                border-bottom: 1px solid var(--border);
+            }
+
+            .stat-item:nth-child(2n) {
+                border-right: none;
+            }
+
+            .stat-item:nth-child(3),
+            .stat-item:nth-child(4) {
+                border-bottom: none;
+            }
+
+            .stat-num {
+                font-size: 2.25rem;
+            }
+
+            .stat-label {
+                font-size: 0.6rem;
+                letter-spacing: 0.18em;
+            }
+
+            .reel-item {
+                font-size: 0.85rem;
+                padding: 0 20px;
+                gap: 14px;
+            }
+
+            .reel-strip {
+                padding: 14px 0;
+            }
+
+            #about,
+            #work,
+            #process,
+            #services,
+            #cta {
+                padding: 72px 18px;
+            }
+
+            .section-label {
+                margin-bottom: 36px;
+                font-size: 0.65rem;
+                letter-spacing: 0.28em;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-big-text {
+                font-size: clamp(2.25rem, 11vw, 3.5rem);
+            }
+
+            .work-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 28px;
+                margin-bottom: 40px;
+            }
+
+            .work-title {
+                font-size: clamp(2.25rem, 12vw, 3.75rem);
+            }
+
+            .work-filter {
+                flex-wrap: wrap;
+                width: 100%;
+            }
+
+            .filter-btn {
+                padding: 10px 16px;
+                font-size: 0.68rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .v-card.big,
+            .v-card.small,
+            .v-card.wide,
+            .v-card.third {
+                grid-column: span 1;
+            }
+
+            .v-card.wide {
+                aspect-ratio: 16 / 9;
+            }
+
+            .v-overlay {
+                padding: 16px;
+            }
+
+            .v-overlay-title {
+                font-size: 1.35rem;
+            }
+
+            .v-overlay-tools {
+                flex-wrap: wrap;
+            }
+
+            .process-grid {
+                margin-top: 40px;
+            }
+
+            .process-big {
+                font-size: clamp(2.25rem, 10vw, 3.25rem);
+            }
+
+            .process-step {
+                grid-template-columns: 44px 1fr;
+                gap: 16px;
+                padding: 28px 0;
+            }
+
+            .process-step:hover {
+                padding-left: 0;
+            }
+
+            .process-step .step-desc {
+                max-height: none;
+                opacity: 1;
+                padding-top: 6px;
+            }
+
+            .services-title {
+                font-size: clamp(2.25rem, 12vw, 3.5rem);
+                margin-bottom: 40px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                padding: 32px 22px;
+            }
+
+            .service-title {
+                font-size: 1.15rem;
+            }
+
+            .cta-headline {
+                font-size: clamp(2.25rem, 11vw, 3.5rem);
+                margin-bottom: 28px;
+            }
+
+            .cta-email {
+                font-size: clamp(0.95rem, 4.5vw, 1.35rem);
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+                word-break: break-word;
+            }
+
+            .cta-email svg {
+                width: 26px;
+                height: 26px;
+            }
+
+            .cta-bg-text {
+                font-size: 42vw;
+            }
+        }
+
+        /* Touch devices: normal cursor + no fake cursor ring */
+        @media (hover: none), (pointer: coarse) {
+            html {
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            #cursor-ball,
+            #cursor-ring {
+                display: none !important;
+            }
+
+            .btn-primary,
+            .filter-btn,
+            .hover-target,
+            nav a,
+            .nav-hamburger,
+            .v-card,
+            .service-card,
+            .process-step,
+            .footer-socials a {
+                cursor: pointer;
+            }
+        }
+
+        /* Phones: portfolio titles always readable (no hover) */
+        @media (hover: none) and (pointer: coarse) {
+            .v-card .v-overlay {
+                opacity: 1;
+                background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.35) 45%, transparent 100%);
+            }
+        }
+
+        /* ============================================
            UTILITY CLASSES
         ============================================ */
         .sr-only {
@@ -2047,33 +2345,35 @@
             ease: 'power3.out'
         });
 
-        // Card tilt effect on mousemove
-        document.querySelectorAll('.v-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const cx = rect.width / 2;
-                const cy = rect.height / 2;
-                const rotY = ((x - cx) / cx) * 8;
-                const rotX = -((y - cy) / cy) * 8;
-                gsap.to(card, {
-                    rotationY: rotY,
-                    rotationX: rotX,
-                    transformPerspective: 1000,
-                    duration: 0.4,
-                    ease: 'power2.out'
+        // Card tilt (pointer / mouse only — skipped on touch for perf + no hover)
+        if (window.matchMedia('(pointer: fine)').matches) {
+            document.querySelectorAll('.v-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const cx = rect.width / 2;
+                    const cy = rect.height / 2;
+                    const rotY = ((x - cx) / cx) * 8;
+                    const rotX = -((y - cy) / cy) * 8;
+                    gsap.to(card, {
+                        rotationY: rotY,
+                        rotationX: rotX,
+                        transformPerspective: 1000,
+                        duration: 0.4,
+                        ease: 'power2.out'
+                    });
+                });
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        rotationY: 0,
+                        rotationX: 0,
+                        duration: 0.6,
+                        ease: 'power3.out'
+                    });
                 });
             });
-            card.addEventListener('mouseleave', () => {
-                gsap.to(card, {
-                    rotationY: 0,
-                    rotationX: 0,
-                    duration: 0.6,
-                    ease: 'power3.out'
-                });
-            });
-        });
+        }
 
         // ─────────────────────────────────────────
         // 8. PROCESS SECTION
