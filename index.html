@@ -2067,6 +2067,23 @@
             background: var(--green);
             border-radius: 2px;
             box-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+            transform-origin: bottom center;
+            animation: bounceBar 0.5s infinite alternate ease-in-out;
+        }
+
+        .metrics-bar:nth-child(even) {
+            animation-duration: 0.7s;
+            animation-delay: 0.2s;
+        }
+
+        .metrics-bar:nth-child(3n) {
+            animation-duration: 0.9s;
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounceBar {
+            0% { transform: scaleY(0.2); }
+            100% { transform: scaleY(0.9); }
         }
     </style>
 </head>
@@ -3359,52 +3376,7 @@
         const colors = ['#00ff88', '#8b5cf6', '#3b82f6'];
 
         if (particleContainer) {
-            for (let i = 0; i < particleCount; i++) {
-                const p = document.createElement('div');
-                p.classList.add('gsap-particle');
-                
-                // Random properties
-                const size = gsap.utils.random(2, 6);
-                const color = gsap.utils.random(colors);
-                
-                gsap.set(p, {
-                    width: size,
-                    height: size,
-                    backgroundColor: color,
-                    x: gsap.utils.random(0, window.innerWidth),
-                    y: gsap.utils.random(window.innerHeight, window.innerHeight + 400),
-                    opacity: gsap.utils.random(0.1, 0.4)
-                });
-                
-                particleContainer.appendChild(p);
-                
-                // Animate upward and drift
-                gsap.to(p, {
-                    y: () => `-=${gsap.utils.random(400, 800)}`,
-                    x: () => `+=${gsap.utils.random(-150, 150)}`,
-                    rotation: gsap.utils.random(-180, 180),
-                    duration: gsap.utils.random(8, 20),
-                    ease: 'none',
-                    repeat: -1,
-                    onRepeat: () => {
-                        // Reset Y position randomly below screen on repeat
-                        gsap.set(p, {
-                            x: gsap.utils.random(0, window.innerWidth),
-                            y: window.innerHeight + 50
-                        });
-                    }
-                });
-                
-                // Pulsing opacity
-                gsap.to(p, {
-                    opacity: gsap.utils.random(0.4, 0.8),
-                    duration: gsap.utils.random(2, 5),
-                    repeat: -1,
-                    yoyo: true,
-                    ease: 'sine.inOut',
-                    delay: gsap.utils.random(0, 2)
-                });
-            }
+            // Disabled particle DOM generation to prevent mobile/Vercel lag
         }
 
     })();
@@ -3643,48 +3615,8 @@
         const hud = document.getElementById('metrics-hud');
         if (!hud) return;
 
-        // 1. Animate Audio/CPU Bars
-        const bars = hud.querySelectorAll('.metrics-bar');
-        bars.forEach((bar) => {
-            gsap.set(bar, { transformOrigin: "bottom center" });
-            gsap.to(bar, {
-                scaleY: () => gsap.utils.random(0.2, 1),
-                duration: gsap.utils.random(0.1, 0.4),
-                repeat: -1,
-                yoyo: true,
-                ease: 'sine.inOut',
-                delay: gsap.utils.random(0, 0.2)
-            });
-        });
-
-        // 2. Animate SVG Line Graph
-        const path = hud.querySelector('.metrics-path');
-        
-        function updateGraph() {
-            // Generate random bezier curve string for a smooth graph
-            const pts = [
-                0, gsap.utils.random(5, 35),
-                15, gsap.utils.random(5, 35),
-                30, gsap.utils.random(5, 35),
-                45, gsap.utils.random(5, 35),
-                60, gsap.utils.random(5, 35),
-                75, gsap.utils.random(5, 35),
-                90, gsap.utils.random(5, 35),
-                100, gsap.utils.random(5, 35)
-            ];
-            
-            // Build smooth quadratic bezier path
-            const d = `M0,${pts[1]} Q${pts[2]/2},${pts[3]} ${pts[2]},${(pts[1]+pts[3])/2} T${pts[4]},${(pts[3]+pts[5])/2} T${pts[6]},${(pts[5]+pts[7])/2} T${pts[8]},${(pts[7]+pts[9])/2} T${pts[10]},${(pts[9]+pts[11])/2} T${pts[12]},${(pts[11]+pts[13])/2} T${pts[14]},${pts[15]}`;
-
-            gsap.to(path, {
-                attr: { d: d },
-                duration: 1.5,
-                ease: 'power1.inOut',
-                onComplete: updateGraph
-            });
-        }
-        
-        updateGraph();
+        // Performance Fix: Disabled main-thread GSAP endless loops.
+        // Handled entirely by pure CSS keyframes now.
 
     })();
 
