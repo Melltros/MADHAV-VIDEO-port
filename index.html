@@ -2065,7 +2065,6 @@
             stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;
-            filter: drop-shadow(0 0 6px rgba(139, 92, 246, 0.4));
         }
 
         .metrics-bars-container {
@@ -3369,7 +3368,7 @@
 
         // --- Particle Overlay ---
         const particleContainer = document.getElementById('particle-overlay');
-        const particleCount = 35;
+        const particleCount = 15; // Performance: Reduced from 35
         const colors = ['#00ff88', '#8b5cf6', '#3b82f6'];
 
         if (particleContainer) {
@@ -3387,8 +3386,7 @@
                     backgroundColor: color,
                     x: gsap.utils.random(0, window.innerWidth),
                     y: gsap.utils.random(window.innerHeight, window.innerHeight + 400),
-                    opacity: gsap.utils.random(0.1, 0.4),
-                    boxShadow: `0 0 ${size * 2}px ${color}`
+                    opacity: gsap.utils.random(0.1, 0.4)
                 });
                 
                 particleContainer.appendChild(p);
@@ -3423,11 +3421,13 @@
         }
 
         // --- Cursor Trail ---
+        let lastTrailTime = 0;
         window.addEventListener('mousemove', (e) => {
             if(window.matchMedia('(pointer: fine)').matches) {
-                // Throttle trailing with a random chance
-                if (Math.random() > 0.4) {
+                const now = performance.now();
+                if (now - lastTrailTime > 50) { // Limit spawn rate
                     createTrailDot(e.clientX, e.clientY);
+                    lastTrailTime = now;
                 }
             }
         });
@@ -3734,15 +3734,21 @@
         updateGraph();
 
         // 3. Parallax Hover Effect
+        let metricTicker = false;
         window.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 20;
-            const y = (e.clientY / window.innerHeight - 0.5) * 20;
-            
-            gsap.to(hud, {
-                x: x,
-                y: y,
-                duration: 0.8,
-                ease: 'power2.out'
+            if (metricTicker) return;
+            metricTicker = true;
+            requestAnimationFrame(() => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                
+                gsap.to(hud, {
+                    x: x,
+                    y: y,
+                    duration: 0.8,
+                    ease: 'power2.out'
+                });
+                metricTicker = false;
             });
         });
     })();
